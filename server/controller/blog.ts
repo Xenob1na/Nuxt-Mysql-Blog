@@ -28,11 +28,8 @@ export const create = async (evt: H3Event) => {
         return {
             data: result
         };
-    } catch {
-        throw createError({
-            statusCode: 500,
-            statusMessage: 'Something went wrong',
-        })
+    } catch (error) {
+        alert(error)
     }
 }
 
@@ -62,11 +59,9 @@ export const update = async (evt: H3Event) => {
         return {
             data: result
         };
-    } catch {
-        throw createError({
-            statusCode: 500,
-            statusMessage: 'Something went wrong',
-        })
+    } catch (error) {
+        console.log(error);
+        
     }
 }
 

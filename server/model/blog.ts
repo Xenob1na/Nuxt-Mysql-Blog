@@ -15,18 +15,10 @@ export const read = async () => {
   return result as BlogModel[];
 };
 
-export const create = async (data: Pick<BlogModel, "title" | "content">) => {
+export const create = async (data: Pick<BlogModel, 'title' | 'content'>) => {
   const result = (await sql({
-    query: `
-            INSERT INTO blog (
-               title,
-               content 
-            ) VALUES (
-                ?,
-                ?
-            ) RETURNING *
-        `,
-    values: [data.title, data.content],
+    query: "INSERT INTO blog (title, content) VALUES (?,?)",
+    values: [data.title, data.content]
   })) as any;
 
   return result.length === 1 ? (result[0] as BlogModel) : null;
@@ -43,13 +35,7 @@ export const detail = async (id: string) => {
 
 export const update = async (id: string, data: Pick<BlogModel, "title" | "content">) => {
   await sql({
-    query: `
-        UPDATE blog
-        SET
-          title = ?,
-          content = ?
-        WHERE id = ?
-        `,
+    query: "UPDATE blog SET title = ?, content = ? WHERE id = ?",
     values: [data.title, data.content, id],
   })
 
